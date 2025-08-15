@@ -1,0 +1,122 @@
+.projects-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.projects-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.project-card {
+  background: #181818;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s;
+}
+.project-card:hover {
+  transform: translateY(-6px) scale(1.02);
+}
+
+.project-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background: #222;
+}
+
+.project-content {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.project-description {
+  flex: 1;
+  margin-bottom: 1rem;
+  color: #bdbdbd;
+}
+
+.project-tech-stack {
+  margin-bottom: 1rem;
+}
+
+.project-badge {
+  display: inline-block;
+  background: #282c34;
+  color: #61dafb;
+  border-radius: 12px;
+  padding: 0.3em 0.8em;
+  font-size: 0.9em;
+  margin-right: 0.5em;
+  margin-bottom: 0.3em;
+}
+
+.project-links {
+  display: flex;
+  gap: 1em;
+}
+
+.project-link {
+  color: #fff;
+  background: #646cff;
+  padding: 0.5em 1em;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+.project-link:hover {
+  background: #535bf2;
+}
+
+.projects-spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40vh;
+}
+
+.projects-spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #646cff;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 600px) {
+  .projects-title {
+    font-size: 2rem;
+  }
+  .project-image {
+    height: 140px;
+  }
+  .projects-container {
+    padding: 1rem 0.2rem;
+  }
+}
+
