@@ -12,7 +12,8 @@ app.use(express.json());
 app.use(cors());
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI, {
+const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/portfolio';
+mongoose.connect(mongoUri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
@@ -28,12 +29,13 @@ app.use('/contact', contactRoutes);
 // Admin login route
 app.post('/api/admin/login', (req, res) => {
   const { username, password } = req.body;
-  const adminUsername = process.env.ADMIN_USERNAME;
-  const adminPassword = process.env.ADMIN_PASSWORD;
+  const adminUsername = process.env.ADMIN_USERNAME || 'admin';
+  const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
+  const jwtSecret = process.env.JWT_SECRET || 'hardcoded_jwt_secret';
 
   if (username === adminUsername && password === adminPassword) {
     // Generate JWT
-    const token = jwt.sign({ username }, 'hardcoded_jwt_secret', { expiresIn: '1h' });
+    const token = jwt.sign({ username }, jwtSecret, { expiresIn: '1h' });
     return res.json({ token });
   } else {
     return res.status(401).json({ error: 'Invalid credentials' });

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Home from './pages/Home.jsx';
 import Projects from './pages/Projects.jsx';
 import Contact from './pages/Contact.jsx';
 import AdminLogin from './pages/AdminLogin.jsx';
@@ -18,7 +19,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Projects />} />
+        <Route path="/" element={<Home />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/admin/login" element={<AdminLogin />} />
