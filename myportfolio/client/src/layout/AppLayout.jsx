@@ -43,68 +43,64 @@ const AppLayout = ({ children, showHero = false }) => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header Section */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="fixed top-0 left-0 right-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
-            <div className="flex items-center">
-              <Link to="/" className="flex items-center space-x-2">
-                <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">D</span>
-                </div>
-                <span className="text-xl font-bold text-foreground">Dawit</span>
-              </Link>
-            </div>
+            <Link to="/" className="flex items-center space-x-2">
+              <div className="h-6 w-6 rounded-full bg-black"></div>
+              <span className="text-lg font-semibold">dawit</span>
+            </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:block">
-              <NavigationMenu>
-                <NavigationMenuList>
-                  {navigationItems.map((item) => (
-                    <NavigationMenuItem key={item.path}>
-                      <Link to={item.path}>
-                        <NavigationMenuLink
-                          className={cn(
-                            navigationMenuTriggerStyle(),
-                            isActive(item.path) && "bg-accent text-accent-foreground"
-                          )}
-                        >
-                          {item.name}
-                        </NavigationMenuLink>
-                      </Link>
-                    </NavigationMenuItem>
-                  ))}
-                </NavigationMenuList>
-              </NavigationMenu>
+            <nav className="hidden md:flex items-center space-x-8">
+              {navigationItems.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`text-sm font-medium transition-colors hover:text-black ${
+                    isActive(item.path) ? 'text-black' : 'text-gray-500'
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              ))}
+              <Button variant="outline" size="sm" className="ml-4 rounded-full border-black bg-transparent text-black hover:bg-gray-100 hover:text-black">
+                Contact me
+              </Button>
             </nav>
 
-            {/* Mobile Menu */}
+            {/* Mobile Menu Button */}
             <div className="md:hidden">
               <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
                 <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon" className="h-9 w-9">
+                  <Button variant="ghost" size="icon" className="md:hidden">
                     <Menu className="h-5 w-5" />
                     <span className="sr-only">Toggle menu</span>
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-                  <div className="flex flex-col space-y-4 mt-8">
+                  <nav className="flex flex-col gap-6 mt-8">
                     {navigationItems.map((item) => (
                       <Link
                         key={item.path}
                         to={item.path}
+                        className={`text-lg font-medium ${
+                          isActive(item.path) ? 'text-black' : 'text-gray-500'
+                        }`}
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className={cn(
-                          "flex items-center px-4 py-2 text-sm font-medium rounded-md transition-colors",
-                          isActive(item.path)
-                            ? "bg-accent text-accent-foreground"
-                            : "text-foreground hover:bg-accent hover:text-accent-foreground"
-                        )}
                       >
                         {item.name}
                       </Link>
                     ))}
-                  </div>
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      className="mt-4 w-full rounded-full border-black bg-transparent text-black hover:bg-gray-100 hover:text-black"
+                    >
+                      Contact me
+                    </Button>
+                  </nav>
                 </SheetContent>
               </Sheet>
             </div>
